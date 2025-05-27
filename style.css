@@ -1,0 +1,158 @@
+:root {
+  --obstacle-speed: 3s;
+}
+
+/* Reset and background */
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #87ceeb; /* fallback sky blue */
+  }
+  
+  /* Main game container */
+  #game {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Sky with clouds (animated) */
+  .sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-image: url('clouds.png');
+    background-size: contain;
+    background-repeat: repeat-x;
+    animation: moveSky 60s linear infinite;
+    z-index: 0;
+  }
+  
+  @keyframes moveSky {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  /* Ground at the bottom */
+  .ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, #2e8b57, #228B22);
+    z-index: 1;
+  }
+  
+  /* Main character */
+  .player {
+    position: absolute;
+    bottom: 100px;
+    width: 100px;
+    height: 100px;
+    background-image: url('character.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 100px;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+    z-index: 2;
+  }
+  
+ /* Obstacle (pipe) */
+.obstacle {
+    position: absolute;
+    bottom: 80px; /* Lower the obstacle position */
+    width: 60px; /* Smaller width */
+    height: 100px; /* Smaller height */
+    background-image: url('obstacle.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 100vw;
+    border-radius: 10px;
+    animation: moveObstacle var(--obstacle-speed, 3s) linear infinite;
+
+    z-index: 2;
+  }
+  
+  
+  
+  @keyframes moveObstacle {
+    0% {
+      left: 100vw;
+    }
+    100% {
+      left: -80px;
+    }
+  }
+  
+  /* Scoreboard */
+  .scoreboard {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 20px;
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 3;
+  }
+  
+  /* Restart button */
+  .restart-btn {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    padding: 10px 20px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 3;
+  }
+  .coin {
+    position: absolute;
+    bottom: 150px;
+    width: 50px;
+    height: 50px;
+    background-image: url('clouds.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    left: 100vw;
+    animation: moveCoin 4s linear infinite;
+    z-index: 2;
+  }
+  
+  @keyframes moveCoin {
+    0% {
+      left: 100vw;
+    }
+    100% {
+      left: -60px;
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  
+  .coin {
+    animation: moveCoin 4s linear infinite, bounce 1s ease-in-out infinite;
+  }
+  
+  
